@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Header from "./components/Header";
+import useAsync from "./hooks/useAsync";
+import { fetchCharacters } from "./services/fetchCharacters";
 
 function App() {
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const characters = useAsync<string>(fetchCharacters, pageNumber);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <Header />
+      <div>Names</div>
+      <div>Name</div>
+      <div>Name</div>
+      <div>Name</div>
+      <div>circular progress...</div>
+      <div>
+        <p>{characters.status==='success' && ""}</p>
+      </div>
     </div>
   );
 }
