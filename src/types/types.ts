@@ -18,8 +18,5 @@ export type Character = {
 };
 
 export type CharacterResponse = {
-    data: {
-        results: Array<Character>,
-        fakeNumber: number
-    }
+  results: Array<Character>,
 }

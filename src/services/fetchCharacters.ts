@@ -10,7 +10,7 @@ export async function fetchCharacters(pageNumber:number) {
           page: pageNumber,
         },
       });
-    return result.data.data.results;
+    return result.data.results;
   } catch (error) {
     return error;
   }
