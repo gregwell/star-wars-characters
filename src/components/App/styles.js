@@ -8,5 +8,6 @@ export default makeStyles((theme) => ({
         backgroundColor: "black",
         opacity: "90%",
         width: "33%",
+        color: "white",
     }
 }));
