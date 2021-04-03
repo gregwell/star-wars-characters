@@ -1,11 +1,16 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import "./App.css";
-import Header from "../Header/Header";
+import Navbar from "../Navbar/Navbar";
 import useCharacters from "../../hooks/useCharacters";
 import { fetchCharacters } from "../../services/fetchCharacters";
 import { Character } from "../../types/types";
 
+import { Container, Grid } from "@material-ui/core";
+import useStyles from './styles';
+
+
 function App() {
+  const classes = useStyles();
+
   const [pageNumber, setPageNumber] = useState(1);
   const { status, characters, error, hasMore } = useCharacters(
     fetchCharacters,
@@ -41,27 +46,24 @@ function App() {
 
   return (
     <>
-    <div className="header-container">
-      <Header />
-    </div>
-    
-    <div className="app-container">
-      <div>
+    <Navbar />
+    <Container className={classes.content}>
           <>
+          <Grid container justify="space-between" alignItems="stretch" spacing={3}>
             {characters.map((character: Character, index: number) => {
               return (
-                <div key={index} className="character-container">
+                <Grid item key={index} className={classes.gridItem}>
                   {character.name}, {character.birth_year}, {character.gender}
-                </div>
+                </Grid>
               );
             })}
             <div ref={ref}></div>
+          </Grid>
           </>
           {status === "error" && { error }}
           {status === "pending" && "loading..."}
           {status === "idle" && "idle..."}
-      </div>
-    </div>
+    </Container>
     </>
   );
 }
