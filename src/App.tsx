@@ -1,13 +1,16 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
-import useAsync from "./hooks/useAsync";
+import useCharacters from "./hooks/useCharacters";
 import { fetchCharacters } from "./services/fetchCharacters";
 import { Character } from "./types/types";
 
 function App() {
   const [pageNumber, setPageNumber] = useState(1);
-  const { status, characters, error } = useAsync(fetchCharacters, pageNumber);
+  const { status, characters, error, hasMore } = useCharacters(
+    fetchCharacters,
+    pageNumber
+  );
 
   const loadMoreResults = () => {
     setPageNumber((prevPageNumber) => prevPageNumber + 1);
@@ -18,23 +21,23 @@ function App() {
   const loadMore = useCallback(
     (entries) => {
       const target = entries[0];
-      if (target.isIntersecting) {
+      if (target.isIntersecting && hasMore) {
         status === "success" && loadMoreResults();
       }
     },
-    [status]
+    [status, hasMore]
   );
 
   useEffect(() => {
     const options = {
-      threshold: 1.0
-  };
+      threshold: 1.0,
+    };
     const observer = new IntersectionObserver(loadMore, options);
     const currentRef = ref.current;
     if (ref && currentRef) {
       observer.observe(currentRef);
     }
-  },[ref, loadMore]);
+  }, [ref, loadMore]);
 
   /*
   const lastCharacterRef = useCallback(
@@ -55,21 +58,13 @@ function App() {
       <Header />
       <div>
         <p>
+          <>
+            {characters.map((character: Character, index: number) => {
+              return <p key={index}>{character.name}</p>;
+            })}
+            <div ref={ref}></div>
+          </>
 
-            <>
-              success!
-              {characters.map((character: Character, index: number) => {
-                
-                  return (
-                    <p key={index}>
-                      {character.name}
-                    </p>
-                  );
-                
-              })}
-              <div ref={ref}></div>
-            </>
-          
           {status === "error" && { error }}
           {status === "pending" && "loading..."}
           {status === "idle" && "idle..."}

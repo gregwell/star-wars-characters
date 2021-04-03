@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Character } from "../types/types";
 
-const useAsync = <T, E = string>(
+const useCharacters = <T, E = string>(
   asyncFunction: (pageNumber: number) => Promise<T>,
   pageNumber: number
 ) => {
@@ -10,6 +10,7 @@ const useAsync = <T, E = string>(
   >("idle");
   const [characters, setCharacters] = useState<Array<Character>>([]);
   const [error, setError] = useState<E | null>(null);
+  const [hasMore, setHasMore] = useState<boolean>(false);
 
   const execute = useCallback(() => {
     setStatus("pending");
@@ -17,7 +18,13 @@ const useAsync = <T, E = string>(
 
     return asyncFunction(pageNumber)
       .then((response: any) => {
-        setCharacters((prevCharacters) => [...prevCharacters, ...response]);
+        if (response.length > 0) {
+          setCharacters((prevCharacters) => [...prevCharacters, ...response]);
+          setHasMore(true);
+        } else {
+          setHasMore(false);
+        }
+
         setStatus("success");
       })
       .catch((error: any) => {
@@ -30,7 +37,7 @@ const useAsync = <T, E = string>(
     execute();
   }, [execute]);
 
-  return { status, characters, error };
+  return { status, characters, error, hasMore };
 };
 
-export default useAsync;
+export default useCharacters;
