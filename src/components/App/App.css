@@ -7,7 +7,6 @@
 
 .character-container {
   background-color: black;
-  margin-bottom: 50px;
   color: white;
   height: 100px;
   width: 70vw;
@@ -18,4 +17,7 @@
 .header-container {
   position: sticky;
   top: 0;
+  background-color: yellow;
+  width: 100%;
+  text-align: center;
 }

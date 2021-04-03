@@ -1,9 +1,9 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import "./App.css";
-import Header from "./components/Header";
-import useCharacters from "./hooks/useCharacters";
-import { fetchCharacters } from "./services/fetchCharacters";
-import { Character } from "./types/types";
+import Header from "../Header/Header";
+import useCharacters from "../../hooks/useCharacters";
+import { fetchCharacters } from "../../services/fetchCharacters";
+import { Character } from "../../types/types";
 
 function App() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -40,13 +40,13 @@ function App() {
   }, [ref, loadMore]);
 
   return (
+    <>
+    <div className="header-container">
+      <Header />
+    </div>
+    
     <div className="app-container">
-      <div className="header-container">
-        <Header/>
-      </div>
-      
       <div>
-        <p>
           <>
             {characters.map((character: Character, index: number) => {
               return (
@@ -57,13 +57,12 @@ function App() {
             })}
             <div ref={ref}></div>
           </>
-
           {status === "error" && { error }}
           {status === "pending" && "loading..."}
           {status === "idle" && "idle..."}
-        </p>
       </div>
     </div>
+    </>
   );
 }
 
