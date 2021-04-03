@@ -4,10 +4,21 @@ export default makeStyles((theme) => ({
     content: {
 
     },
-    gridItem: {
+    card: {
         backgroundColor: "black",
-        opacity: "90%",
-        width: "33%",
+        opacity: "95%",
+        width: "100%",
         color: "white",
+        margin: "10px",
+        height: "20vw",
+        textAlign: "center",
+        borderRadius: "10px",
+        padding:"25%",
+    },
+    gridItem: {
+        width: "33%",
+    },
+    typography: {
+        fontSize: "3vh",
     }
 }));

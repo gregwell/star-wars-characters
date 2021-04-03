@@ -4,9 +4,8 @@ import useCharacters from "../../hooks/useCharacters";
 import { fetchCharacters } from "../../services/fetchCharacters";
 import { Character } from "../../types/types";
 
-import { Container, Grid } from "@material-ui/core";
-import useStyles from './styles';
-
+import { Container, Grid, Card, Typography } from "@material-ui/core";
+import useStyles from "./styles";
 
 function App() {
   const classes = useStyles();
@@ -46,24 +45,34 @@ function App() {
 
   return (
     <>
-    <Navbar />
-    <Container className={classes.content}>
-          <>
-          <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+      <Navbar />
+      <Container className={classes.content}>
+        <>
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            spacing={3}
+          >
             {characters.map((character: Character, index: number) => {
               return (
-                <Grid item key={index} className={classes.gridItem}>
-                  {character.name}, {character.birth_year}, {character.gender}
+                <Grid item className={classes.gridItem} xs={12} sm={4}>
+                  <Card key={index} className={classes.card}>
+                    <Typography className={classes.typography}>
+                      {character.name}
+                    </Typography>
+                    {character.birth_year}, {character.gender}
+                  </Card>
                 </Grid>
               );
             })}
             <div ref={ref}></div>
           </Grid>
-          </>
-          {status === "error" && { error }}
-          {status === "pending" && "loading..."}
-          {status === "idle" && "idle..."}
-    </Container>
+        </>
+        {status === "error" && { error }}
+        {status === "pending" && "loading..."}
+        {status === "idle" && "idle..."}
+      </Container>
     </>
   );
 }
