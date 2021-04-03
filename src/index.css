@@ -9,6 +9,10 @@ body {
   justify-content: center;
   align-items: center;
   color: #FFE81F;
+  background-image: url(images/background.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 code {

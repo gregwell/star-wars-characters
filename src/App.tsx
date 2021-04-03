@@ -39,28 +39,21 @@ function App() {
     }
   }, [ref, loadMore]);
 
-  /*
-  const lastCharacterRef = useCallback(
-    (node) => {
-      if (status==='pending') return;
-        ref.current = new IntersectionObserver(entries => {
-        if(entries[0].isIntersecting) {
-          setPageNumber(prevPageNumber => prevPageNumber +1)
-        }
-      })
-    },
-    [status]
-  )
-  */
-
   return (
     <div className="app-container">
-      <Header />
+      <div className="header-container">
+        <Header/>
+      </div>
+      
       <div>
         <p>
           <>
             {characters.map((character: Character, index: number) => {
-              return <p key={index}>{character.name}</p>;
+              return (
+                <div key={index} className="character-container">
+                  {character.name}, {character.birth_year}, {character.gender}
+                </div>
+              );
             })}
             <div ref={ref}></div>
           </>
@@ -70,7 +63,6 @@ function App() {
           {status === "idle" && "idle..."}
         </p>
       </div>
-      <button onClick={loadMoreResults}>Click here</button>
     </div>
   );
 }

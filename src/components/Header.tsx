@@ -3,9 +3,8 @@ import './Header.css';
 
 const Header = () => {
   return (
-<div>
+<div className="header-container">
   <img src={logo} alt="star wars logo" className="image"/>
-  <p className="title"> Browse your favorite Star Wars characters </p>
 </div>
   
   )
