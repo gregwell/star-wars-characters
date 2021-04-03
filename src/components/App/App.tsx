@@ -52,7 +52,8 @@ function App() {
             container
             justify="center"
             alignItems="center"
-            spacing={3}
+            spacing={5}
+            className={classes.gridContainer}
           >
             {characters.map((character: Character, index: number) => {
               return (

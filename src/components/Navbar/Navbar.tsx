@@ -6,7 +6,7 @@ import useStyles from './styles';
 const Navbar = () => {
   const classes = useStyles();
   return (
-    <AppBar className={classes.appBar} position="static">
+    <AppBar className={classes.appBar} position="fixed">
       <img src={logo} alt="star wars logo" className={classes.img}/>
     </AppBar>
   );
