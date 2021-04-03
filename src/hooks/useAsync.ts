@@ -17,7 +17,7 @@ const useAsync = <T, E = string>(
 
     return asyncFunction(pageNumber)
       .then((response: any) => {
-        setCharacters(prevCharacters => [...prevCharacters, ...response]);
+        setCharacters((prevCharacters) => [...prevCharacters, ...response]);
         setStatus("success");
       })
       .catch((error: any) => {

@@ -18,5 +18,5 @@ export type Character = {
 };
 
 export type CharacterResponse = {
-  results: Array<Character>,
-}
+  results: Array<Character>;
+};

@@ -8,10 +8,10 @@ import { Character } from "./types/types";
 function App() {
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { status, characters, error} = useAsync(fetchCharacters, pageNumber);
+  const { status, characters, error } = useAsync(fetchCharacters, pageNumber);
 
   const loadMoreResults = () => {
-    setPageNumber(pageNumber+1);
+    setPageNumber((prevPageNumber) => prevPageNumber + 1);
   };
 
   return (
@@ -22,23 +22,17 @@ function App() {
           {status === "success" && (
             <>
               success!
-              {characters.map(
-                (objectMapped: Character, index: number) => {
-                  return <p key={index}>{objectMapped.name}</p>;
-                }
-              )}
+              {characters.map((objectMapped: Character, index: number) => {
+                return <p key={index}>{objectMapped.name}</p>;
+              })}
             </>
           )}
-          {status === "error" && {error}}
+          {status === "error" && { error }}
           {status === "pending" && "pending..."}
           {status === "idle" && "idle..."}
         </p>
       </div>
-      <button
-        onClick={loadMoreResults}
-      >
-        Click here
-      </button>
+      <button onClick={loadMoreResults}>Click here</button>
     </div>
   );
 }
