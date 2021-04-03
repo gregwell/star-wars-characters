@@ -8,24 +8,37 @@ import { Character } from "./types/types";
 function App() {
   const [pageNumber, setPageNumber] = useState(1);
 
-  const characters = useAsync(fetchCharacters, pageNumber);
+  const { status, characters, error} = useAsync(fetchCharacters, pageNumber);
+
+  const loadMoreResults = () => {
+    setPageNumber(pageNumber+1);
+  };
 
   return (
     <div className="app-container">
       <Header />
       <div>
         <p>
-          {characters.status === "success" && (
+          {status === "success" && (
             <>
-          {characters.value.map((objectMapped:Character, index:number) => {
-            return (
-              <p key={index}>{objectMapped.name}</p>
-            )
-          })}
+              success!
+              {characters.map(
+                (objectMapped: Character, index: number) => {
+                  return <p key={index}>{objectMapped.name}</p>;
+                }
+              )}
             </>
           )}
+          {status === "error" && {error}}
+          {status === "pending" && "pending..."}
+          {status === "idle" && "idle..."}
         </p>
       </div>
+      <button
+        onClick={loadMoreResults}
+      >
+        Click here
+      </button>
     </div>
   );
 }

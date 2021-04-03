@@ -1,23 +1,23 @@
 import { useState, useEffect, useCallback } from "react";
+import { Character } from "../types/types";
 
 const useAsync = <T, E = string>(
   asyncFunction: (pageNumber: number) => Promise<T>,
-  pageNumber = 1
+  pageNumber: number
 ) => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >("idle");
-  const [value, setValue] = useState<T | null>(null);
+  const [characters, setCharacters] = useState<Array<Character>>([]);
   const [error, setError] = useState<E | null>(null);
 
   const execute = useCallback(() => {
     setStatus("pending");
-    setValue(null);
     setError(null);
 
     return asyncFunction(pageNumber)
       .then((response: any) => {
-        setValue(response);
+        setCharacters(prevCharacters => [...prevCharacters, ...response]);
         setStatus("success");
       })
       .catch((error: any) => {
@@ -28,9 +28,9 @@ const useAsync = <T, E = string>(
 
   useEffect(() => {
     execute();
-  }, [execute, pageNumber]);
+  }, [execute]);
 
-  return { execute, status, value, error };
+  return { status, characters, error };
 };
 
 export default useAsync;
