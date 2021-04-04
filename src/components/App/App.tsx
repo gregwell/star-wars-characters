@@ -44,6 +44,12 @@ function App() {
     }
   }, [ref, loadMore]);
 
+  const [activeCard, setActiveCard] = useState<number>();
+
+  const toggleActive = (index: number) => {
+    setActiveCard(index);
+  };
+
   return (
     <>
       <Navbar />
@@ -59,12 +65,15 @@ function App() {
             {characters.map((character: Character, index: number) => {
               return (
                 <Grid item className={classes.gridItem} xs={12} sm={4}>
-                  <Card key={index} className={classes.card}>
-                    <Typography className={classes.typography}>
-                      {character.name}
-                    </Typography>
-                    {character.birth_year}, {character.gender}
-                  </Card>
+                  <div onClick={() => toggleActive(index)}>
+                    <Card key={index} className={classes.card}>
+                      <Typography className={classes.typography}>
+                        {character.name}
+                      </Typography>
+                      {character.birth_year}, {character.gender}
+                      {activeCard === index && <p>this card is active!</p>}
+                    </Card>
+                  </div>
                 </Grid>
               );
             })}
@@ -72,9 +81,9 @@ function App() {
           </Grid>
         </>
         <div className={classes.statusContainer}>
-        {status === "error" && { error }}
-        {status === "pending" && <CircularProgress size="4rem" />}
-        {status === "idle" && "idle..."}
+          {status === "pending" && <CircularProgress size="4rem" />}
+          {status === "error" && "Error: " + { error }}
+          {status === "idle" && "Something went wrong. Try again later!"}
         </div>
       </Container>
     </>

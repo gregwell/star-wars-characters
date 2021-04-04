@@ -29,5 +29,6 @@ export default makeStyles(() => ({
   },
   statusContainer: {
     textAlign: "center",
+    color: "white",
   }
 }));
