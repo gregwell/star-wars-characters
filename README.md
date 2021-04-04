@@ -8,7 +8,8 @@ This app allows you to browse all star wars characters based on [The Star Wars A
 
 1. Familiarize myself with the syntax of TypeScript.
 2. Use axios instead of fetch API to fetch data from API.
-3. Create a responsive layout.
+3. Implement infinite scroll.
+4. Create a responsive layout.
 
 ## Demo
 
