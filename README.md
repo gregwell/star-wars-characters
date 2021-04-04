@@ -8,8 +8,8 @@ This app allows you to browse all star wars characters based on [The Star Wars A
 
 1. Familiarize with TypeScript syntax
 2. Further develop React skills
--  Use axios instead of fetch method to fetch data from API.
--  Implement infinite scroll with useRef and IntersectionObserver API.
+    -  Use axios instead of fetch method to fetch data from API.
+    -  Implement infinite scroll with useRef and IntersectionObserver API.
 
 ## How to run this project locally
 
