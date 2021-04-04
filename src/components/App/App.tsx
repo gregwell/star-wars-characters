@@ -1,33 +1,31 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+
 import Navbar from "../Navbar/Navbar";
+import ActiveCard from "../ActiveCard/ActiveCard";
+import InactiveCard from "../InactiveCard/InactiveCard";
+import StatusContainer from "../StatusContainer/StatusContainer";
 import useCharacters from "../../hooks/useCharacters";
 import useFilms from "../../hooks/useFilms";
+import { SUCCESS } from "../../constants/status";
 import { Character } from "../../types/types";
 
-import { Container, Grid, Card, Typography } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import { Container, Grid } from "@material-ui/core";
 import useStyles from "./styles";
-import ActiveCard from "../ActiveCard/ActiveCard";
 
 function App() {
   const classes = useStyles();
 
   const [pageNumber, setPageNumber] = useState(1);
   const fetchedCharacters = useCharacters(pageNumber);
-
   const fetchedFilms = useFilms(false);
-
-  const loadMoreResults = () => {
-    setPageNumber((prevPageNumber) => prevPageNumber + 1);
-  };
-
   const ref = useRef<HTMLDivElement | null>(null);
 
   const loadMore = useCallback(
     (entries) => {
       const target = entries[0];
       if (target.isIntersecting && fetchedCharacters.hasMore) {
-        fetchedCharacters.status === "success" && loadMoreResults();
+        fetchedCharacters.status === SUCCESS &&
+          setPageNumber((prevPageNumber) => prevPageNumber + 1);
       }
     },
     [fetchedCharacters.status, fetchedCharacters.hasMore]
@@ -56,7 +54,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Container className={classes.content}>
+      <Container>
         <>
           <Grid
             container
@@ -79,12 +77,7 @@ function App() {
                         />
                       )}
                       {activeCard !== index && (
-                        <Card key={index} className={classes.card}>
-                          <Typography className={classes.typography}>
-                            {character.name}
-                          </Typography>
-                          {character.birth_year}, {character.gender}
-                        </Card>
+                        <InactiveCard character={character} index={index} />
                       )}
                     </div>
                   </Grid>
@@ -94,12 +87,7 @@ function App() {
             <div ref={ref}></div>
           </Grid>
         </>
-        <div className={classes.statusContainer}>
-          {fetchedCharacters.status === "pending" && <CircularProgress size="4rem" />}
-          {fetchedCharacters.status === "error" && "Error: " + fetchedCharacters.error}
-          {fetchedCharacters.status === "idle" &&
-            "Something went wrong. Try again later!"}
-        </div>
+        <StatusContainer status={fetchedCharacters.status} />
       </Container>
     </>
   );

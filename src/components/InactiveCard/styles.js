@@ -1,11 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(() => ({
-  activeCard: {
-    backgroundColor: "yellow",
-    opacity: "80%",
-    width: "100%",
-    color: "black",
+  card: {
+    backgroundColor: "black",
+    opacity: "85%",
+    width: "98%",
+    color: "white",
     margin: "5",
     height: "20vw",
     textAlign: "center",
@@ -13,7 +13,7 @@ export default makeStyles(() => ({
     padding: "25%",
     "&:hover, &:focus": {
       border: "solid 2px yellow",
-      color: "black",
+      color: "yellow",
     },
   },
   typography: {
