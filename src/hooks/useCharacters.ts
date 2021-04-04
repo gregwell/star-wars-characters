@@ -22,12 +22,12 @@ const useCharacters = <E = string>(pageNumber: number) => {
         } else {
           setHasMore(false);
         }
-
         setStatus("success");
       })
       .catch((error: any) => {
         setError(error);
         setStatus("error");
+        setHasMore(false);
       });
   }, [pageNumber]);
 

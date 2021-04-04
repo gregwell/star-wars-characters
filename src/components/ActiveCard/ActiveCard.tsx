@@ -20,9 +20,13 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
   return (
     <Card key={index} className={classes.activeCard}>
       <Typography className={classes.typography}>{character.name}</Typography>
-      <p>Birth year: {character.birth_year}</p>
-      <p>Gender: {character.gender}</p>
-      <p>Height: {character.height}</p>
+      <p className={classes.category}>BIRTH YEAR</p>
+      {character.birth_year}
+      <p className={classes.category}>GENDER</p>
+      {character.gender}
+      <p className={classes.category}>HEIGHT</p>
+      {character.height}
+      <p className={classes.category}>FILMS PLAYED IN</p>
       {character.films.map(
         (characterFilmUrl: string, characterFilmIndex: number) => {
           return (
@@ -31,7 +35,7 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
                 films.map((film: Film, filmIndex: number) => {
                   return (
                     <div key={filmIndex}>
-                      {characterFilmUrl === film.url && <p>{film.title}</p>}
+                      {characterFilmUrl === film.url && <div>{film.title}</div>}
                     </div>
                   );
                 })}
