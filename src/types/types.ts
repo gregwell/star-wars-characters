@@ -20,3 +20,12 @@ export type Character = {
 export type CharacterResponse = {
   results: Array<Character>;
 };
+
+export type Film = {
+  title: string;
+  url: string;
+};
+
+export type FilmResponse = {
+  results: Array<Film>;
+};

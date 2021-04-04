@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
+import { fetchCharacters } from "../services/fetchCharacters";
 import { Character } from "../types/types";
 
-const useCharacters = <T, E = string>(
-  asyncFunction: (pageNumber: number) => Promise<T>,
-  pageNumber: number
-) => {
+const useCharacters = <E = string>(pageNumber: number) => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >("idle");
@@ -16,7 +14,7 @@ const useCharacters = <T, E = string>(
     setStatus("pending");
     setError(null);
 
-    return asyncFunction(pageNumber)
+    return fetchCharacters(pageNumber)
       .then((response: any) => {
         if (response.length > 0) {
           setCharacters((prevCharacters) => [...prevCharacters, ...response]);
@@ -31,7 +29,7 @@ const useCharacters = <T, E = string>(
         setError(error);
         setStatus("error");
       });
-  }, [asyncFunction, pageNumber]);
+  }, [pageNumber]);
 
   useEffect(() => {
     execute();

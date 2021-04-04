@@ -1,8 +1,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import useCharacters from "../../hooks/useCharacters";
-import { fetchCharacters } from "../../services/fetchCharacters";
-import { Character } from "../../types/types";
+import useFilms from "../../hooks/useFilms";
+import { Character, Film } from "../../types/types";
 
 import { Container, Grid, Card, Typography } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -12,10 +12,9 @@ function App() {
   const classes = useStyles();
 
   const [pageNumber, setPageNumber] = useState(1);
-  const { status, characters, error, hasMore } = useCharacters(
-    fetchCharacters,
-    pageNumber
-  );
+  const characters = useCharacters(pageNumber);
+
+  const films = useFilms(false);
 
   const loadMoreResults = () => {
     setPageNumber((prevPageNumber) => prevPageNumber + 1);
@@ -26,11 +25,11 @@ function App() {
   const loadMore = useCallback(
     (entries) => {
       const target = entries[0];
-      if (target.isIntersecting && hasMore) {
-        status === "success" && loadMoreResults();
+      if (target.isIntersecting && characters.hasMore) {
+        characters.status === "success" && loadMoreResults();
       }
     },
-    [status, hasMore]
+    [characters.status, characters.hasMore]
   );
 
   useEffect(() => {
@@ -48,6 +47,7 @@ function App() {
 
   const toggleActive = (index: number) => {
     setActiveCard(index);
+    films.execute();
   };
 
   return (
@@ -62,7 +62,7 @@ function App() {
             spacing={5}
             className={classes.gridContainer}
           >
-            {characters.map((character: Character, index: number) => {
+            {characters.characters.map((character: Character, index: number) => {
               return (
                 <Grid item className={classes.gridItem} xs={12} sm={4}>
                   <div onClick={() => toggleActive(index)}>
@@ -74,6 +74,36 @@ function App() {
                         <p>Birth year: {character.birth_year}</p>
                         <p>Gender: {character.gender}</p>
                         <p>Height: {character.height}</p>
+                        {character.films.map(
+                          (
+                            characterFilmUrl: string,
+                            characterFilmIndex: number
+                          ) => {
+                            return (
+                              <div key={characterFilmIndex}>
+                                {films.status === "success" &&
+                                  films.films.map(
+                                    (film: Film, filmIndex: number) => {
+                                      return (
+                                        <div key={filmIndex}>
+                                          {characterFilmUrl === film.url && (
+                                            <p>{film.title}</p>
+                                          )}
+                                        </div>
+                                      );
+                                    }
+                                  )}
+                              </div>
+                            );
+                          }
+                        )}
+                        {films.status === "pending" && (
+                          <CircularProgress size="3rem" />
+                        )}
+                        {(films.status === "error" ||
+                          films.status === "idle") && (
+                          <p>An error occurred while downloading films</p>
+                        )}
                       </Card>
                     )}
                     {activeCard !== index && (
@@ -92,9 +122,9 @@ function App() {
           </Grid>
         </>
         <div className={classes.statusContainer}>
-          {status === "pending" && <CircularProgress size="4rem" />}
-          {status === "error" && "Error: " + { error }}
-          {status === "idle" && "Something went wrong. Try again later!"}
+          {characters.status === "pending" && <CircularProgress size="4rem" />}
+          {characters.status === "error" && "Error: " +  characters.error }
+          {characters.status === "idle" && "Something went wrong. Try again later!"}
         </div>
       </Container>
     </>
