@@ -66,13 +66,24 @@ function App() {
               return (
                 <Grid item className={classes.gridItem} xs={12} sm={4}>
                   <div onClick={() => toggleActive(index)}>
-                    <Card key={index} className={classes.card}>
-                      <Typography className={classes.typography}>
-                        {character.name}
-                      </Typography>
-                      {character.birth_year}, {character.gender}
-                      {activeCard === index && <p>this card is active!</p>}
-                    </Card>
+                    {activeCard === index && (
+                      <Card key={index} className={classes.activeCard}>
+                        <Typography className={classes.typography}>
+                          {character.name}
+                        </Typography>
+                        <p>Birth year: {character.birth_year}</p>
+                        <p>Gender: {character.gender}</p>
+                        <p>Height: {character.height}</p>
+                      </Card>
+                    )}
+                    {activeCard !== index && (
+                      <Card key={index} className={classes.card}>
+                        <Typography className={classes.typography}>
+                          {character.name}
+                        </Typography>
+                        {character.birth_year}, {character.gender}
+                      </Card>
+                    )}
                   </div>
                 </Grid>
               );

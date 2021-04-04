@@ -1,46 +1,28 @@
-# Getting Started with Create React App
+# Star Wars Characters
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Created:** 2.04.2021, **last updated:** 4.04.2021
 
-## Available Scripts
+This app allows you to browse all star wars characters based on [The Star Wars API](https://swapi.dev/)
 
-In the project directory, you can run:
+## Demo - alpha version
 
-### `yarn start`
+![/demo/demo.gif](/demo/demo.gif)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How to run this project locally
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Clone the repository
+2. In project folder open terminal and run:
+    - `yarn install` to install dependencies
+    - `yarn start` to run the app in the development mode
+    - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+3. Optionally, you can also run:
+    - `yarn test` to run tests.
+    - `yarn build` to build the app for production (to the`build` folder).
+4. Even more optionally, you can:
+    - `yarn eject` - as the app was created with [Create React App](https://github.com/facebook/create-react-app) this is a script that allows you to remove the single build dependency. All the configuration files and transitive dependencies (webpack, Babel, ESLint etc.) will be copied right into the project giving full control over them.
 
-### `yarn test`
+## Goals
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Familiarize myself with the syntax of TypeScript.
+2. Use axios instead of fetch API to fetch data from API.
+3. Create a responsive layout.

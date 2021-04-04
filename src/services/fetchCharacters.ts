@@ -15,14 +15,3 @@ export async function fetchCharacters(pageNumber: number) {
     return error;
   }
 }
-
-/*
-    const result = await axios.request<CharacterResponse>({
-      url: "https://swapi.dev/api/people",
-      method: "get",
-      params: {
-        page: pageNumber,
-      },
-    });
-
-*/
