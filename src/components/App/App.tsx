@@ -5,6 +5,7 @@ import { fetchCharacters } from "../../services/fetchCharacters";
 import { Character } from "../../types/types";
 
 import { Container, Grid, Card, Typography } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import useStyles from "./styles";
 
 function App() {
@@ -70,9 +71,11 @@ function App() {
             <div ref={ref}></div>
           </Grid>
         </>
+        <div className={classes.statusContainer}>
         {status === "error" && { error }}
-        {status === "pending" && "loading..."}
+        {status === "pending" && <CircularProgress size="4rem" />}
         {status === "idle" && "idle..."}
+        </div>
       </Container>
     </>
   );

@@ -1,6 +1,5 @@
 import logo from "../../images/logo.svg";
 import { AppBar } from "@material-ui/core";
-
 import useStyles from './styles';
 
 const Navbar = () => {
