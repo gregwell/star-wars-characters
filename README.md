@@ -11,6 +11,10 @@ This app allows you to browse all star wars characters based on [The Star Wars A
     -  Use axios instead of fetch method to fetch data from API.
     -  Implement infinite scroll with useRef and IntersectionObserver API.
 
+## Screenshots
+
+![screenshot](demo/demo.png)
+
 ## How to run this project locally
 
 1. Clone the repository
