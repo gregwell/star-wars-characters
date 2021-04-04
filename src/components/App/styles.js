@@ -7,7 +7,7 @@ export default makeStyles((theme) => ({
     card: {
         backgroundColor: "black",
         opacity: "85%",
-        width: "100%",
+        width: "98%",
         color: "white",
         margin: "5",
         height: "20vw",
@@ -15,14 +15,15 @@ export default makeStyles((theme) => ({
         borderRadius: "10px",
         padding:"25%",
         "&:hover, &:focus": {
-            backgroundColor: "#020A1E",
+            border: "solid 1px yellow",
+            color: "yellow"
         }
     },
     gridItem: {
         width: "33%",
     },
     typography: {
-        fontSize: "3vh",
+        fontSize: "3vh"
     },
     gridContainer: {
         marginTop: "100px"
