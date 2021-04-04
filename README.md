@@ -4,7 +4,13 @@
 
 This app allows you to browse all star wars characters based on [The Star Wars API](https://swapi.dev/)
 
-## Demo - alpha version
+## Goals
+
+1. Familiarize myself with the syntax of TypeScript.
+2. Use axios instead of fetch API to fetch data from API.
+3. Create a responsive layout.
+
+## Demo
 
 ![/demo/demo.gif](/demo/demo.gif)
 
@@ -21,8 +27,3 @@ This app allows you to browse all star wars characters based on [The Star Wars A
 4. Even more optionally, you can:
     - `yarn eject` - as the app was created with [Create React App](https://github.com/facebook/create-react-app) this is a script that allows you to remove the single build dependency. All the configuration files and transitive dependencies (webpack, Babel, ESLint etc.) will be copied right into the project giving full control over them.
 
-## Goals
-
-1. Familiarize myself with the syntax of TypeScript.
-2. Use axios instead of fetch API to fetch data from API.
-3. Create a responsive layout.
