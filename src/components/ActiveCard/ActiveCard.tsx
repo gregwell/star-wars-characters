@@ -2,6 +2,7 @@ import { Card, Typography } from "@material-ui/core";
 import { Character, Film } from "../../types/types";
 import useStyles from "./styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { ERROR, IDLE, PENDING, SUCCESS } from "../../constants/status";
 
 interface ActiveCardProps {
   character: Character;
@@ -31,7 +32,7 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
         (characterFilmUrl: string, characterFilmIndex: number) => {
           return (
             <div key={characterFilmIndex}>
-              {filmsStatus === "success" &&
+              {filmsStatus === SUCCESS &&
                 films.map((film: Film, filmIndex: number) => {
                   return (
                     <div key={filmIndex}>
@@ -43,8 +44,8 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
           );
         }
       )}
-      {filmsStatus === "pending" && <CircularProgress size="3rem" />}
-      {(filmsStatus === "error" || filmsStatus === "idle") && (
+      {filmsStatus === PENDING && <CircularProgress size="3rem" />}
+      {(filmsStatus === ERROR || filmsStatus === IDLE) && (
         <p>An error occurred while downloading films</p>
       )}
     </Card>
