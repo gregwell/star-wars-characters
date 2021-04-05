@@ -28,11 +28,12 @@ const useCharacters = <E = string>(pageNumber: number) => {
         ...result.data.results,
       ]);
       setStatus(SUCCESS);
-      setHasMore(true);
+      if (typeof result.data.next === 'string') {
+        setHasMore(true);
+      }
     } catch (error) {
       setError(error);
       setStatus(ERROR);
-      setHasMore(false);
     }
   }, [pageNumber]);
 

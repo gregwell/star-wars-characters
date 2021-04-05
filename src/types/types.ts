@@ -19,6 +19,7 @@ export type Character = {
 
 export type CharacterResponse = {
   results: Array<Character>;
+  next: string | null;
 };
 
 export type Film = {
