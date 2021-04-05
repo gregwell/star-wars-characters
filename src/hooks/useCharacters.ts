@@ -30,6 +30,8 @@ const useCharacters = <E = string>(pageNumber: number) => {
       setStatus(SUCCESS);
       if (typeof result.data.next === 'string') {
         setHasMore(true);
+      } else if (result.data.next === null) {
+        setHasMore(false);
       }
     } catch (error) {
       setError(error);
