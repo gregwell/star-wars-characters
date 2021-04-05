@@ -57,18 +57,19 @@ function App() {
           {fetchedCharacters.characters.map(
             (character: Character, index: number) => {
               return (
-                <Grid item className={classes.gridItem} xs={12} sm={4}>
-                  <div onClick={() => toggleActive(index)}>
+                <Grid item className={classes.gridItem} xs={12} sm={4} key={index}>
+                  <div onClick={() => toggleActive(index)} key={index}>
                     {activeCard === index && (
                       <ActiveCard
                         character={character}
                         films={fetchedFilms.films}
                         filmsStatus={fetchedFilms.status}
                         index={index}
+                        key={index}
                       />
                     )}
                     {activeCard !== index && (
-                      <InactiveCard character={character} index={index} />
+                      <InactiveCard character={character} index={index} key={index} />
                     )}
                   </div>
                 </Grid>
