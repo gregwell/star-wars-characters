@@ -15,7 +15,7 @@ const useCharacters = <E = string>(pageNumber: number) => {
     setError(null);
 
     return fetchCharacters(pageNumber)
-      .then((response: any) => {
+      .then((response: Array<Character>) => {
         if (response.length > 0) {
           setCharacters((prevCharacters) => [...prevCharacters, ...response]);
           setHasMore(true);
