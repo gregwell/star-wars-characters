@@ -4,12 +4,12 @@ import axios from "axios";
 import { CharacterResponse } from "../types/types";
 import { SUCCESS, PENDING, ERROR, IDLE } from "../constants/status";
 
-const useCharacters = <E = string>(pageNumber: number) => {
+const useCharacters = (pageNumber: number) => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
   >(IDLE);
   const [characters, setCharacters] = useState<Array<Character>>([]);
-  const [error, setError] = useState<E | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState<boolean>(false);
 
   const execute = useCallback(async () => {
@@ -28,7 +28,7 @@ const useCharacters = <E = string>(pageNumber: number) => {
         ...result.data.results,
       ]);
       setStatus(SUCCESS);
-      if (typeof result.data.next === 'string') {
+      if (typeof result.data.next === "string") {
         setHasMore(true);
       } else if (result.data.next === null) {
         setHasMore(false);
