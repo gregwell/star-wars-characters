@@ -1,34 +1,39 @@
 import { useState, useEffect, useCallback } from "react";
-import { fetchCharacters } from "../services/fetchCharacters";
 import { Character } from "../types/types";
+import axios from "axios";
+import { CharacterResponse } from "../types/types";
+import { SUCCESS, PENDING, ERROR, IDLE } from "../constants/status";
 
 const useCharacters = <E = string>(pageNumber: number) => {
   const [status, setStatus] = useState<
     "idle" | "pending" | "success" | "error"
-  >("idle");
+  >(IDLE);
   const [characters, setCharacters] = useState<Array<Character>>([]);
   const [error, setError] = useState<E | null>(null);
   const [hasMore, setHasMore] = useState<boolean>(false);
 
-  const execute = useCallback(() => {
-    setStatus("pending");
+  const execute = useCallback(async () => {
+    setStatus(PENDING);
     setError(null);
-
-    return fetchCharacters(pageNumber)
-      .then((response: Array<Character>) => {
-        if (response.length > 0) {
-          setCharacters((prevCharacters) => [...prevCharacters, ...response]);
-          setHasMore(true);
-        } else {
-          setHasMore(false);
-        }
-        setStatus("success");
-      })
-      .catch((error: any) => {
-        setError(error);
-        setStatus("error");
-        setHasMore(false);
+    try {
+      const result = await axios.request<CharacterResponse>({
+        url: "https://swapi.dev/api/people",
+        method: "get",
+        params: {
+          page: pageNumber,
+        },
       });
+      setCharacters((prevCharacters) => [
+        ...prevCharacters,
+        ...result.data.results,
+      ]);
+      setStatus(SUCCESS);
+      setHasMore(true);
+    } catch (error) {
+      setError(error);
+      setStatus(ERROR);
+      setHasMore(false);
+    }
   }, [pageNumber]);
 
   useEffect(() => {
