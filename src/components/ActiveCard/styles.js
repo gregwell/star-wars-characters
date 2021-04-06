@@ -22,6 +22,7 @@ export default makeStyles(() => ({
     marginTop: "4px",
     marginBottom: "4px",
     fontWeight: "bold",
-    color: "yellow"
+    color: "yellow",
+    textTransform: "uppercase",
   },
 }));

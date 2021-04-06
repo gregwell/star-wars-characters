@@ -21,13 +21,13 @@ const ActiveCard: React.FC<ActiveCardProps> = ({
   return (
     <Card key={index} className={classes.activeCard}>
       <Typography className={classes.typography}>{character.name}</Typography>
-      <p className={classes.category}>BIRTH YEAR</p>
+      <p className={classes.category}>birth year</p>
       {character.birth_year}
-      <p className={classes.category}>GENDER</p>
+      <p className={classes.category}>gender</p>
       {character.gender}
-      <p className={classes.category}>HEIGHT</p>
+      <p className={classes.category}>height</p>
       {character.height}
-      <p className={classes.category}>FILMS PLAYED IN</p>
+      <p className={classes.category}>films played in</p>
       {character.films.map(
         (characterFilmUrl: string, characterFilmIndex: number) => {
           return (
