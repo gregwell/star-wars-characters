@@ -1,6 +1,6 @@
 # Star Wars Characters
 
-**Created:** 2.04.2021, **last updated:** 4.04.2021
+**Created:** 2.04.2021, **last updated:** 7.04.2021
 
 This app allows you to browse all star wars characters based on [The Star Wars API](https://swapi.dev/)
 

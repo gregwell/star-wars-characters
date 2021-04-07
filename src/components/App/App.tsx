@@ -10,6 +10,7 @@ import { Character } from "../../types/types";
 
 import { Container, Grid } from "@material-ui/core";
 import useStyles from "./styles";
+import { SUCCESS } from "../../constants/status";
 
 function App() {
   const classes = useStyles();
@@ -26,15 +27,21 @@ function App() {
     };
 
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && fetchedCharacters.hasMore) {
+      if (entries[0].isIntersecting && fetchedCharacters.hasMore && fetchedCharacters.status===SUCCESS) {
         setPageNumber((prevPageNumber) => prevPageNumber + 1);
       }
     }, options);
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const refCurrent = ref.current;
+    if (refCurrent) {
+      observer.observe(refCurrent);
     }
-  }, [ref, fetchedCharacters.hasMore]);
+
+    return () => {
+      if (refCurrent) observer.unobserve(refCurrent);
+    };
+
+  }, [ref, fetchedCharacters.hasMore, fetchedCharacters.status]);
 
   const toggleActive = (index: number) => {
     setActiveCard(index);

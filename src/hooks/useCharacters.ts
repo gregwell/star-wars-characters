@@ -28,9 +28,11 @@ const useCharacters = (pageNumber: number) => {
         ...result.data.results,
       ]);
       setStatus(SUCCESS);
-      if (typeof result.data.next === "string") {
+      const next = typeof result.data.next;
+      if (next === "string") {
         setHasMore(true);
-      } else if (result.data.next === null) {
+      }
+      if (next === "object") {
         setHasMore(false);
       }
     } catch (error) {
